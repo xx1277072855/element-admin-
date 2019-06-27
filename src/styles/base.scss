@@ -1,0 +1,123 @@
+
+
+//-----------------------------------------------------
+
+$font-color                  : #333 !default;
+
+$white                       : #fff !default;
+$red                         : #ea0406 !default;
+$orange                      : #FF7921 !default;
+$yellow                      : #f8b62d !default;
+$olive                       : #4bbf7f !default;
+$green                       : #00C587 !default;
+$teal                        : #3399ff !default;
+$blue                        : #00a0e9 !default;
+$violet                      : #6435C9 !default;
+$purple                      : #6907c0 !default;
+$pink                        : #E03997 !default;
+$brown                       : #A5673F !default;
+$grey                        : #9B9B9B !default;
+$black                       : #4b4b4b !default;
+
+
+// 边框颜色
+//-----------------------------------------------------
+$border-color:#e6e6e6;
+
+$map-colors:(
+	'red':    $white    $red        $red,
+	'orange': $white    $orange     $orange,
+	'green':  $white    $green      $green,
+	'teal':   $white    $teal       $teal,
+	'yellow': $white    $yellow     $yellow,
+	'olive':  $white    $olive      $olive,
+	'blue':   $white    $blue       $blue,
+	'violet': $white    $violet     $violet,
+	'purple': $white    $purple     $purple,
+	'pink':   $white    $pink       $pink,
+	'brown':  $white    $brown      $brown,
+	'white':  $font-color     $white      darken($border-color,8%),
+	'grey':   $white    $grey       lighten($grey,20%),
+	'black':  $white    $black      $black
+);
+
+//文本颜色
+//-----------------------------------------------------
+@each $name, $color in $map-colors{
+  // 字体颜色
+  .t-#{$name}{
+    color: nth($color,2) !important;
+  }
+  // 背景颜色
+  .bg-#{$name}{
+    background-color: nth($color, 2) !important;
+    &,a{
+      color: nth($color, 1);
+    }
+  }
+}
+// 字体大小
+@for $i from 10 through 200 {
+  .f-s-#{$i}{
+    font-size:($i) * 1px;
+  }
+}
+
+//填充边距方法
+//-----------------------------------------------------
+@mixin padding-margin($className,$attr){
+  @for $i from 0 through 700 {
+    .#{$className}#{$i}{
+      #{$attr}:($i) * 1px;
+    }
+  }
+}
+//默认填充
+//-----------------------------------------------------
+
+@include padding-margin(pd,padding);
+@include padding-margin(pt,padding-top);
+@include padding-margin(pr,padding-right);
+@include padding-margin(pb,padding-bottom);
+@include padding-margin(pl,padding-left);
+
+//默认边距
+//-----------------------------------------------------
+@include padding-margin(mg,margin);
+@include padding-margin(mt,margin-top);
+@include padding-margin(mr,margin-right);
+@include padding-margin(mb,margin-bottom);
+@include padding-margin(ml,margin-left);
+
+//辅助类
+//-----------------------------------------------------
+
+//对齐方式
+.tl{text-align:left!important;}
+.tr{text-align:right!important;}
+.tc{text-align:center!important;}
+.tj{text-align:justify;}
+.tn{white-space:nowrap;}
+.b{font-weight:700;}
+.d{text-decoration: line-through;}
+
+//浮动
+//-----------------------------------------------------
+.clear{
+  &:before,
+  &:after {
+    display: table;
+  }
+  &:after {
+    content:"";
+    clear: both;
+  }
+}
+.fl,.fr{display:inline}
+.fr{float:right;}
+.fl{float:left;}
+
+.block{
+  display: block;
+  width: 100%;
+}
